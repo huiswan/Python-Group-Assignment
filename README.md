@@ -33,7 +33,7 @@ Create a virtual environment in the project folder
 ```
 
 Activate the virtual environment
-```
+```bash
   .\venv\Scripts\activate
 ```
 
@@ -46,9 +46,9 @@ Install the dependencies using pip
   pip install - r requirements.txt
 ```
 
-Run the program 
+Run the program with default options. Add the `-d` to run the program in `debug` mode and `-i` to specify the `image path`  
 ```bash
-  python app.py
+  python app.py -i "./Testing_Images/pass_1.jpg" -d
 ```
 
 <br>

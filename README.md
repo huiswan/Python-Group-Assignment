@@ -66,16 +66,21 @@ Run the program
 
 - One main thing would be to make it real time. The code for it is pretty straight-forward. All we need to do is pass the **captured frame** as the image input. Something like this :
 
-```
-cap = cv2.VideoCapture(0)
-fourcc = cv2.VideoWriter_fourcc(*'XVID')
-flag = 0
+  ```
+  cap = cv2.VideoCapture(0)
+  fourcc = cv2.VideoWriter_fourcc(*'XVID')
+  flag = 0
 
-while(True) :
-    ret, img = cap.read()
-    .
-    .
+  while(True) :
+      ret, img = cap.read()
+      .
+      .
 
-```
+  ```
 
-While doing so, we need to proceed with the ML model **only when the sudoku board is identified**. And for that, a hard-coded value of image dimensions would not work. I've experimented with realtime but the results were not satisfactory (either the digits were recognized incorrectly or the board was not getting identified). There are ways to mitigate these issues and optimize the whole program. These could be implemented in the near future. 
+
+  While doing so, we need to proceed with the ML model **only when the sudoku board is identified**. And for that, a hard-coded value of image dimensions would not work. I've experimented with realtime but the results were not satisfactory (either the digits were recognized incorrectly or the board was not getting identified). There are ways to mitigate these issues and optimize the whole program. These could be implemented in the near future. 
+
+- **Improving the ML model** : Currently, there are a few cases where 1 or digits are misclassified, which is generally accepted to be normal. But in the case of a sudoku, even 1 misclassification can alter the problem. For example, the image located `./Testing_Images/fail_1.png` fails due to this exact problem :
+
+  ![Misclassification Problem](./misclassification_example.png)

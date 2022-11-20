@@ -62,7 +62,7 @@ if __name__ == "__main__" :
         default_warp_options = {
             "points" : [pts1, pts2],
             "dimensions" : [img_width, img_height],
-            "convert_to_color" : True
+            "convert_to_gray" : True
         }
 
         img_warp_colored = default_warp(img, default_warp_options)
@@ -74,8 +74,9 @@ if __name__ == "__main__" :
 
         # 6. Get The Numbers From The Image
         
-        model = OCR().get_model()
-        numbers = model.get_predection(boxes, model)
+        model = OCR()
+        result_threshold = 0.7
+        numbers = model.get_prediction(boxes, result_threshold)
         
         img_detected_digits = display_result(img_detected_digits, numbers, color=(255, 0, 255))
 
@@ -87,11 +88,11 @@ if __name__ == "__main__" :
         board = np.array_split(numbers, 9)
         ss = SudokuSolver(board)
         try:
-            ss.solve(board)
-            ss.print_board(board)
+            ss.solve()
+            ss.print_board()
         except:
-            print("NOT SOLVED !")
-            pass
+            print("SUDOKU COULD NOT BE SOLVED !")
+            exit(0)
         
         res = []
         for sublist in board:
@@ -103,12 +104,15 @@ if __name__ == "__main__" :
 
         # 8. Overlay The Solution
 
-        default_warp_options_inv = default_warp_options.copy()
-        default_warp_options_inv.points = [pts2, pts1]
+        default_warp_options = {
+            "points" : [pts2, pts1],
+            "dimensions" : [img_width, img_height],
+            "convert_to_gray" : False
+        }
 
-        img_warp_colored = default_warp(img_solved_digits, default_warp_options_inv)
+        img_warp_colored = default_warp(img_solved_digits, default_warp_options)
 
-        output_image = cv2.addWeighted(img_warp_colored, 1, img, 0.5, 1)
+        output_image = cv2.addWeighted(img_warp_colored, 1, img, 0.25, 1)
 
         img_detected_digits = draw_grid(img_detected_digits)
         img_solved_digits = draw_grid(img_solved_digits)

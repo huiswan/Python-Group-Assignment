@@ -92,12 +92,12 @@ def reorder_for_warp_perspective(points) :
 def default_warp(img, options) :
     p1, p2 = options["points"]
     w, h = options["dimensions"]
-    col = options["convert_to_color"]
+    gray = options["convert_to_gray"]
    
     matrix = cv2.getPerspectiveTransform(p1, p2)
     img_warp = cv2.warpPerspective(img, matrix, (w, h))
    
-    if(col) :
+    if(gray) :
         return cv2.cvtColor(img_warp, cv2.COLOR_BGR2GRAY)
 
     return img_warp
@@ -111,10 +111,11 @@ def split_into_boxes(img):
             boxes.append(box)
     return boxes
 
-def display_result(img, numbers, color=(255, 0, 0)) :
+def display_result(img, numbers, color=(0, 0, 255)) :
     """
         sw : sector (box) width 
         sh : sector (box) height
+        color : in BGR format
     """
     sw = int(img.shape[1] / 9)
     sh = int(img.shape[0] / 9)

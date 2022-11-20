@@ -1,16 +1,16 @@
 import numpy as np
 import cv2
 
-from tensorflow.keras.models import load_model
+from keras.models import load_model
 
 class OCR :
-    def __init__(self, model_path="./digit_recognition_model.h5"):
+    def __init__(self, model_path="OCR/digit_recognition_model.h5"):
         self.model = load_model(model_path)
 
     def get_model(self) :
         return self.model
 
-    def get_predection(self, boxes, result_threshold=0.7):
+    def get_prediction(self, boxes, result_threshold=0.7):
         result = []
         for image in boxes:
             # Prepare the image from individual boxes

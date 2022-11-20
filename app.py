@@ -7,6 +7,7 @@ from Solver.solver import SudokuSolver
 
 
 if __name__ == "__main__" :    
+    
     img_height = 450
     img_width = 450
 

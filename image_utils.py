@@ -28,6 +28,9 @@ def preprocess(img):
     
     return imgThreshold
 
+def sharpen(img) :
+    sharpen_kernel = np.array([[0,-1,0], [-1,5,-1], [0,-1,0]])
+    return cv2.filter2D(img, -1, sharpen_kernel)
 
 def find_contours(img) :
     """
@@ -54,7 +57,7 @@ def find_biggest_contours(contours):
     max_area = 0
     for c in contours:
         area = cv2.contourArea(c)
-        if area > 200:
+        if area > 2500:
             perimeter = cv2.arcLength(c, True)
             approx = cv2.approxPolyDP(c, 0.02 * perimeter, True)
 

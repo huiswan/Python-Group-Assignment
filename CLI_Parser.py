@@ -9,6 +9,7 @@ class CLI :
             add_help=True
         )
         
+        self.parser.add_argument("-d", help="Debug Mode", action="store_true")
         self.parser.add_argument("-i", help="Image absolute path", default="./Testing_Images/1.jpg")
         # self.parser.add_argument("-w", help="Real time (Webcam)", action="store_false")
     

@@ -12,14 +12,14 @@ class OCR :
 
     def get_prediction(self, boxes, result_threshold=0.7):
         result = []
-        for image in boxes:
+        for (i, image) in enumerate(boxes):
+            print("Identifying Digit : ", i+1)
             # Prepare the image from individual boxes
             img = np.asarray(image)
             img = img[4:img.shape[0] - 4, 4:img.shape[1] -4]
             img = cv2.resize(img, (28, 28))
             img = img / 255
             img = img.reshape(1, 28, 28, 1)
-
             predictions = self.model.predict(img)
             classIndex = np.argmax(predictions, axis=1)
             probabilityValue = np.amax(predictions)

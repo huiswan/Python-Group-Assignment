@@ -1,6 +1,7 @@
-# AI Sudoku Solver
+# CleverCell
 
-This is a simple program that uses AI and backtracking to solve sudoku problems.
+CleverCell, a Sudoku solver, takes input as an image, solves the puzzle, 
+and displays the result directly on the original puzzle interface.
 
 <br>
 
